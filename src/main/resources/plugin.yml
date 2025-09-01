@@ -1,0 +1,24 @@
+name: VillageNations
+main: net.doodcraft.cozmyc.villages.VillagesPlugin
+version: 1.3.0
+author: cozmyc
+description: Village land-claim system
+dependencies:
+  - Vault
+  - WorldGuard
+  - WorldEdit
+soft-depends:
+  - BlueMap
+  - PlaceholderAPI
+  - ProjectKorra
+api-version: 1.21
+commands:
+  village:
+    description: Main command for village management
+    usage: /village help
+    aliases: [v]
+  villageadmin:
+    description: Admin command for plugin and server village management
+    usage: /villageadmin help
+    aliases: [va]
+    permission: villages.admin

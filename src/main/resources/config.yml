@@ -1,0 +1,494 @@
+# Village and Nation Plugin Configuration
+village:
+  # Costs in economy currency
+  creation_cost: 256
+  claim_cost: 32
+  outpost_claim_cost: 128  # Cost for claiming an outpost chunk
+  # Distance settings
+  min_distance_between_villages: 8  # Minimum chunks between village claims
+  # Inactivity settings
+  mayor_inactivity_days: -1  # Days before a village is considered inactive and automatically deleted if the mayor doesnt login. -1 disables this.
+  # Invite settings
+  invite_timeout_seconds: 600  # How long village invites last
+  # Whether villages can change their element after it is set
+  allow_element_change: true
+  # Cooldown in seconds for /village spawn command
+  spawn_cooldown_seconds: 300  # Default: 5 minutes
+
+mobs:
+  allow_natural_mob_spawns: false
+  allow_spawner_mob_spawns: true
+  allow_egg_mob_spawns: true
+  remove_mobs_on_player_damage: true
+  protect_animals_in_claims: true
+
+# WorldGuard integration
+worldguard:
+  # Default/enforced protection flags for all village claims.
+  # Mayors can toggle some of these if you allow it.
+  # You can add any valid WorldGuard flag here, even 3rd party provided flags.
+  flags:
+    enderdragon-block-damage: deny
+    enderman-grief: deny
+    creeper-explosion: deny
+    breeze-charge-explosion: deny
+    ghast-fireball: deny
+    other-explosion: deny
+    lighter: allow  # Set to deny to block lighter usage
+    lighter-group: members  # Group restriction for lighter
+    ravager-grief: deny
+    entity-item-frame-destroy: deny
+    entity-painting-destroy: deny
+    lava-fire: deny
+    mycelium-spread: deny
+    lightning: deny
+    wither-damage: deny
+    fire-spread: deny
+    water-flow: deny
+    lava-flow: deny
+    pvp: allow
+    deny-message: "§7§oThis land is protected by a magical force."
+    entry-deny-message: ""
+    exit-deny-message: ""
+    block-place: allow
+    block-place-group: members
+    block-break: allow
+    block-break-group: members
+    use: allow
+    use-group: members
+    interact: allow
+    interact-group: members
+    pistons: allow
+    pistons-group: none
+    sculk-growth: allow
+    item-drop: allow
+    item-pickup: allow
+    sleep: allow
+    bending: allow
+    build: allow # should always be allow
+  # You can erase all these and leave one as false to disable everything.
+  mayor_toggleable_flags:
+    enderman-grief: false
+    creeper-explosion: false
+    breeze-charge-explosion: false
+    ghast-fireball: false
+    other-explosion: false
+    lighter: true
+    lighter-group: true
+    ravager-grief: true
+    entity-item-frame-destroy: false
+    entity-painting-destroy: false
+    lava-fire: true
+    mycelium-spread: true
+    lightning: true
+    wither-damage: false
+    fire-spread: true
+    water-flow: false
+    lava-flow: false
+    pvp: true
+    deny-message: true
+    block-place: true
+    block-place-group: true
+    block-break: true
+    block-break-group: true
+    use: true
+    use-group: true
+    interact: true
+    interact-group: true
+    pistons: false
+    pistons-group: false
+    sculk-growth: false
+    item-drop: false
+    item-pickup: false
+    sleep: false
+    bending: false
+    build: false  # keep this false always
+
+# Discord Webhook Configuration
+discord:
+  webhook_url: ""  # Your Discord webhook URL here, leave blank to disable.
+  colors:
+    village_created: 65280  # Green
+    village_deleted: 16711680  # Red
+    village_renamed: 16776960  # Yellow
+    village_joined: 3447003  # Blue
+    village_left: 15158332  # Red
+  messages:
+    # Placeholders: %player%, %village%, %element%, %mayor%, %old_village%, %new_village%
+    village_created: "**%player%** has founded a new village!\nName: %village%\nElement: %element%"
+    village_deleted: "Village **%village%** has fallen into ruins.\nMayor: %mayor%"
+    village_renamed: "Village **%old_village%** has been renamed to **%new_village%**\nMayor: %mayor%"
+    village_joined: "**%player%** has joined the village **%village%**"
+    village_left: "**%player%** has left the village **%village%**"
+  titles:
+    village_created: "🏛 New Village Founded"
+    village_deleted: "🏚 Village Deleted"
+    village_renamed: "🏷 Village Renamed"
+    village_joined: "👋 New Village Member"
+    village_left: "👋 Village Member Left"
+
+# ProjectKorra Integration
+projectkorra:
+  enable_village_element_bonus: true
+  element_buff_zone:
+    min_distance_chunks: 5.0  # Minimum chunk radius for buff zone, will always be this +1 including the mayor.
+    distance_per_member: 1.0  # Additional chunk radius per village member, 0.0 to disable. Includes the mayor.
+    show_titles: false  # Whether to show title/subtitle when entering/leaving buff zone
+    show_messages: true  # Whether to send chat messages when entering/leaving buff zone
+    enter_title: '§bVillage Buff!'
+    enter_subtitle: '§eYou feel empowered.'
+    exit_title: '§7Leaving Buff Zone!'
+    exit_subtitle: '§cYou no longer feel empowered.'
+    enter_message: "§bVillage Buff! §eYou feel empowered."
+    exit_message: "§7Leaving Buff Zone! §cYou no longer feel empowered."
+
+# %villages_village_name%
+# %villages_village_element%
+# %villages_member_rank%
+papi_placeholders:
+  no_village: "No Village"
+  no_element: "None"
+  rank_none: "None"
+  rank_member: "Member"
+  rank_coowner: "Co-Owner"
+  rank_mayor: "Mayor"
+
+# Messages
+messages:
+  prefix: "§8[§6Villages§8] §r"
+  separator: "§8§m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  player_only:
+    title: "§c§l              ⚠ PLAYER ONLY"
+    description: |
+      §7§o    This command can only be used by players.
+  invalid_usage:
+    title: "§c§l              ⚠ INVALID USAGE"
+    description: "§7§o    Usage: %usage%"
+  invalid_element:
+    title: "§c§l              ⚠ INVALID ELEMENT"
+    description: "§7§o    That is not a valid element. Available: §f%elements%"
+  already_in_village:
+    title: "§c§l              ⚠ ALREADY IN VILLAGE"
+    description: |
+      §7§o    You are already a member of a village.
+      §7§o    Use §f/village leave §7§oto leave your current village first.
+  name_taken:
+    title: "§c§l              ⚠ NAME TAKEN"
+    description: |
+      §7§o    That village name is already taken.
+      §7§o    Please choose a different name.
+  insufficient_funds:
+    title: "§c§l              ⚠ INSUFFICIENT FUNDS"
+    description: |
+      §7§o    You need §6%cost% %currency%  §7§oto %action%.
+      §7§o    Current balance: §6%balance% %currency%
+  village_created:
+    title: "§a§l              🎉 VILLAGE CREATED"
+    description: |
+      §7§o    Village: §f%village%
+      §7§o    Element: §b%element%
+      §7§o    Status: §aYou are now the mayor
+  invite_sent:
+    title: "§a§l              ✉ INVITE SENT"
+    description: "§7§o    Invite sent to §f%player%"
+  invite_received:
+    title: "§a§l              ✉ VILLAGE INVITE"
+    description: |
+      §7§o    You have been invited to join:
+      §7§o    Village: §f%village%
+      §7§o    Requested By: §f%inviter%
+      §7§o    Use §f/village accept §7§oto join.
+  not_in_village:
+    title: "§c§l              ⚠ NOT IN VILLAGE"
+    description: |
+      §7§o    You must be in a village to %action%.
+      §7§o    Use §f/village accept §7§oto join a village first.
+  already_coowner:
+    title: "§c§l              ⚠ ALREADY CO-OWNER"
+    description: "§7§o    That player is already a co-owner."
+  not_a_member:
+    title: "§c§l              ⚠ NOT A MEMBER"
+    description: "§7§o    That player is not a member of your village."
+  not_your_claim:
+    title: "§c§l              ⚠ NOT YOUR CLAIM"
+    description: "§7§o    This chunk is not claimed by your village."
+  chunk_claimed:
+    title: "§a§l              🗺 CHUNK CLAIMED"
+    description: |
+      §7§o    Chunk coordinates: §f%x%, %z%
+      §7§o    World: §f%world%
+      §7§o    Cost: §6%cost% %currency%
+  chunk_unclaimed:
+    title: "§a§l              🗺 CHUNK UNCLAIMED"
+    description: |
+      §7§o    Chunk coordinates: §f%x%, %z%
+      §7§o    World: §f%world%
+  region_protected:
+    title: "§c§l              ⚠ REGION PROTECTED"
+    description: "§7§o    This chunk overlaps a protected region and cannot be claimed."
+  region_too_close_to_protected:
+    title: "§c§l              ⚠ TOO CLOSE TO PROTECTED REGION"
+    description: |
+      §7§o    This chunk is too close to a protected region and cannot be claimed.
+      §7§o    You must be at least §f%min_distance% chunks §7§oaway from protected regions.
+  too_close:
+    title: "§c§l              ⚠ TOO CLOSE"
+    description: "§7§o    You must be at least §f%min_distance% chunks §7§oaway from other villages."
+  member_promoted:
+    title: "§a§l              ⭐ MEMBER PROMOTED"
+    description: "§7§o    You have promoted §f%player% §7§oto co-owner."
+  member_demoted:
+    title: "§a§l              🏗 CO-OWNER DEMOTED"
+    description: "§7§o    %player% has been demoted from co-owner in the village '%village%."
+  member_removed:
+    title: "§a§l              🏗 MEMBER REMOVED"
+    description: "§7§o    %player% has been removed from the village '%village%."
+  left_village:
+    title: "§a§l              🏗 LEFT VILLAGE"
+    description: "§7§o    You have left the village '%village%."
+  mayor_cannot_leave:
+    title: "§c§l              ⚠ MAYOR CANNOT LEAVE"
+    description: |
+      §7§o    As the mayor, you cannot leave the village.
+      §7§o    You must transfer mayorship first.
+  element_chosen:
+    title: "§a§l              ✨ ELEMENT CHOSEN"
+    description: "§7§o    Your village has chosen the element: §f%element%"
+  element_already_set:
+    title: "§c§l              ⚠ ELEMENT ALREADY SET"
+    description: "§7§o    Your village has already chosen an element: §f%element%"
+  insufficient_rank:
+    title: "§c§l              ⚠ INSUFFICIENT RANK"
+    description: "§7§o    Only the mayor or co-owners can %action%."
+  player_offline:
+    title: "§c§l              ⚠ PLAYER OFFLINE"
+    description: "§7§o    That player is not online."
+  player_not_found:
+    title: "§c§l              ⚠ PLAYER NOT FOUND"
+    description: "§7§o    The specified player is not online."
+  cannot_target_self:
+    title: "§c§l              ⚠ CANNOT TARGET SELF"
+    description: "§7§o    Someone else must allow you to modify claims."
+  chunk_not_claimed:
+    title: "§c§l              ⚠ CHUNK NOT CLAIMED"
+    description: "§7§o    This chunk is not claimed by your village."
+  chunk_already_claimed:
+    title: "§c§l              ⚠ CHUNK CLAIMED"
+    description: "§7§o    This chunk is already claimed."
+  permission_granted:
+    title: "§a§l              ✅ PERMISSION GRANTED"
+    description: "§7§o    You have granted build permissions to: §f%player%"
+  permission_revoked:
+    title: "§c§l              ❌ PERMISSION REVOKED"
+    description: "§7§o    You have revoked build permissions from: §f%player%"
+  confirm_village_deletion:
+    title: "§c§l              ⚠ CONFIRM VILLAGE DELETION"
+    description: |
+      §7§o    Are you sure you want to delete your village?
+      §7§o    This action is §cIRREVERSIBLE§7.
+      §7§o    Run §f/village delete §7§oagain within 30 seconds to confirm.
+  village_deleted:
+    title: "§c§l              🏚 VILLAGE DELETED"
+    description: |
+      §7§o    Village §f%village% §7§ohas fallen into ruins. %mayor% weeps.
+      §7§o    You received §a%refund%§7§o.
+  chunk_assigned:
+    title: "§a§l              🏠 CHUNK ASSIGNED"
+    description: |
+      §7§o    You have assigned this chunk to:
+      §7§o    §f%player%"
+  chunk_unassigned:
+    title: "§a§l              🏠 CHUNK UNASSIGNED"
+    description: |
+      §7§o    This chunk is now village-owned.
+  invalid_number:
+    title: "§c§l              ⚠ INVALID NUMBER"
+    description: "§7§o    Please enter a valid number."
+  no_invites:
+    title: "§c§l              ⚠ NO INVITES"
+    description: "§7§o    You do not have any pending village invites."
+  outpost_claim:
+    title: "§e§l              ⚠ OUTPOST CLAIM"
+    description: |
+      §7§o    This chunk is not adjacent to your village.
+      §7§o    Creating an outpost will cost §6%cost% %currency%§7§o.
+      §7§o    Run §f/village claim §7§oagain to confirm.
+  outpost_claimed:
+    title: "§a§l              🏰 OUTPOST CLAIMED"
+    description: |
+      §7§o    Outpost established at:
+      §7§o    Chunk coordinates: §f%x%, %z%
+      §7§o    World: §f%world%
+      §7§o    Cost: §6%cost% %currency%
+  no_village_info:
+    title: "§c§l              ⚠ NO VILLAGE INFO"
+    description: |
+      §7§o    No village information available for this location.
+  village_info:
+    title: "§b§l              ℹ VILLAGE INFO"
+    description: |
+      §7§o    Name: §f%name%
+      §7§o    Mayor: §f%mayor%
+      §7§o    Members: §f%members%
+      §7§o    Claims: §f%claims%
+      §7§o    Element: §b%element%
+      §7§o    Allow Member Edit: §f%allow_edit%
+  village_info_chunk:
+    description: |
+      §7§o    Current Chunk Information:
+      §7§o    Coordinates: §f%x%, %z%
+      §7§o    Status: §f%status%
+      §7§o    Village: §f%village%
+      §7§o    Assigned To: §f%assigned_to%
+      §7§o    Allowed Members: %allowed_members%
+  no_villages_exist:
+    title: "§c§l              ⚠ NO VILLAGES"
+    description: |
+      §7§o    No villages exist yet!
+      §7§o    You can be the first. Try §a/village create <name>
+  village_list_header:
+    title: "§b§l              🌍 EXISTING VILLAGES"
+    description: "§7§o    Existing Villages (Page %page%/%total_pages%):"
+  village_list_entry:
+    description: |
+      §8• §f%name% %element%
+        §7Population: §f%population%    §7Mayor: §f%mayor%    §7Claims: §f%claims%
+  village_list_nav:
+    description: "%nav%"
+  map_toggle_enabled:
+    title: "§a§l              🗺 MAP TOGGLE ENABLED"
+    description: |
+      §7§o    Auto-map display has been enabled for 120 seconds.
+      §7§o    Run §f/village map toggle §7§oagain to disable early.
+  map_toggle_disabled:
+    title: "§c§l              🗺 MAP TOGGLE DISABLED"
+    description: |
+      §7§o    Auto-map display has been disabled.
+  map_toggle_expired:
+    title: "§c§l              🗺 MAP TOGGLE EXPIRED"
+    description: |
+      §7§o    Auto-map display has expired.
+  map_legend:
+    description: |
+      §8§l» §fVillage Map §8§l«
+      §f■ §7Your Position
+      §8■ §7Unclaimed Land
+  help:
+    title: "§6§l                      ⚜ VILLAGE COMMANDS ⚜"
+    description: |
+      §6§l⚡ MAYOR ONLY COMMANDS
+      %mayor_commands%
+      §e§l⚔ MAYOR & CO-OWNER COMMANDS
+      %mayor_coowner_commands%
+      §d§l⬛ CHUNK OWNER COMMANDS
+      %chunk_owner_commands%
+      §a§l👥 MEMBER COMMANDS
+      %member_commands%
+      §3§l🌍 GENERAL COMMANDS
+      %general_commands%
+      §8§o                     Need help? Ask a staff member!
+  not_in_village_territory:
+    title: "§c§l              ⚠ NOT IN VILLAGE TERRITORY"
+    description: |
+      §7§o    You must be standing in your village's claimed territory
+      §7§o    to set the spawn point.
+  spawn_set:
+    title: "§a§l              🎯 SPAWN SET"
+    description: |
+      §7§o    Village spawn point has been set to your current location.
+  teleported_to_spawn:
+    title: "§a§l              🏠 TELEPORTED"
+    description: |
+      §7§o    Teleported to village spawn.
+  spawn_cooldown:
+    title: "§c§l              ⚠ SPAWN COOLDOWN"
+    description: |
+      §7§o    You must wait §f%seconds% seconds §7§obefore using /village spawn again.
+  no_spawn_set:
+    title: "§c§l              ⚠ NO SPAWN SET"
+    description: |
+      §7§o    Your village does not have a spawn point set.
+  invalid_map_size:
+    title: "§c§l              ⚠ INVALID MAP SIZE"
+    description: |
+      §7§o    Invalid map size. Using default size of §f%default%§7.
+  pending_invites:
+    title: "§e§l              ✉ PENDING INVITES"
+    description: |
+      §7§o    You have the following pending invites:
+      %invites%
+      §7§o    Use §f/village accept <number> §7§oto accept.
+  joined_village:
+    title: "§a§l              👥 JOINED VILLAGE"
+    description: |
+      §7§o    You have joined the village §f%village%§7.
+  village_not_found:
+    title: "§c§l              ⚠ VILLAGE NOT FOUND"
+    description: |
+      §7§o    The specified village could not be found.
+  feature_disabled:
+    title: "§c§l              ⚠ CANNOT TARGET SELF"
+    description: |
+      §7§o    Mayors and co-owners have permissions in all claims.
+  map_legend_title: "§8§l» §fVillage Map §8§l«"
+  map_legend_your_position: "§f■ §7Your Position"
+  map_legend_unclaimed: "§8■ §7Unclaimed Land"
+  map_legend_village: "§x%color%■ §7%village%"
+  map_legend_owner: "§x%color%■ §7%village% (§f%owner%§7)"
+  village_renamed:
+    title: "§a§l              🏷 VILLAGE RENAMED"
+    description: |
+      §7§o    Your village has been renamed to §f%new_name%§7.
+  flag_batch_success:
+    title: "§a§l              ⚑ FLAG UPDATED"
+    description: |
+      §7§o    Flag §f%flag% §7set to §f%value% §7for §f%count% §7claims in area §f%area%§7.
+  flag_batch_none:
+    title: "§c§l              ⚠ NO CLAIMS"
+    description: |
+      §7§o    No claimed chunks found in the selected area.
+  flag_invalid_value:
+    title: "§c§l              ⚠ INVALID VALUE"
+    description: |
+      §7§o    Invalid value for flag §f%flag%§7.
+  flag_not_toggleable:
+    title: "§c§l              ⚠ FLAG NOT FOUND OR TOGGLEABLE"
+    description: |
+      §7§o    The flag §f%flag% §7cannot be changed by mayors/co-owners.
+  flag_usage:
+    title: "§e§l              ⚑ FLAG USAGE"
+    description: |
+      §7§o    Usage: /village flag <flag> <value> [area]
+      §7§o    Area: 1x1 (default), 3x3, 4x4
+      §7§o 
+      §7§o    The following flags can be toggled by mayors/co-owners:
+      §f    %flags%
+  outpost_spawn_set:
+    title: "§a§l              🎯 OUTPOST SPAWN SET"
+    description: |
+      §7§o    Outpost §f%index% §7§ospawn point has been set to your current location.
+  main_spawn_set:
+    title: "§a§l              🎯 MAIN SPAWN SET"
+    description: |
+      §7§o    Main village spawn point has been set to your current location.
+  outpost_spawn_not_set:
+    title: "§c§l              ⚠ OUTPOST SPAWN NOT SET"
+    description: |
+      §7§o    Outpost §f%index% §7§odoes not have a spawn point set.
+  main_spawn_not_set:
+    title: "§c§l              ⚠ MAIN SPAWN NOT SET"
+    description: |
+      §7§o    Your village does not have a main spawn point set.
+  invalid_outpost_index:
+    title: "§c§l              ⚠ INVALID OUTPOST INDEX"
+    description: |
+      §7§o    Outpost §f%index% §7§ois not a valid outpost for your village.
+  could_not_claim_chunk:
+    title: "§c§l              ⚠ CANNOT CLAIM CHUNK"
+    description: |
+      §7§o    This chunk may connect two outposts or an outpost with your main claim.
+  could_not_unclaim_main_with_outposts:
+    title: "§c§l              ⚠ CANNOT UNCLAIM MAIN AREA"
+    description: |
+      §7§o    You cannot unclaim your last main area claim while you still have outposts.
+      §7§o    Unclaim all outposts first.

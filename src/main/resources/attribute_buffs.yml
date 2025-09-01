@@ -1,0 +1,42 @@
+Speed:
+  type: ADDITIVE
+  value: 0.0
+Range:
+  type: ADDITIVE
+  value: 0.0
+SelectRange:
+  type: ADDITIVE
+  value: 0.0
+Damage:
+  type: ADDITIVE
+  value: 0.0
+Cooldown:
+  type: ADDITIVE
+  value: 0
+Duration:
+  type: ADDITIVE
+  value: 0
+Radius:
+  type: ADDITIVE
+  value: 0.0
+ChargeTime:
+  type: ADDITIVE
+  value: 0
+Width:
+  type: ADDITIVE
+  value: 0.0
+Height:
+  type: ADDITIVE
+  value: 0.0
+Knockback:
+  type: ADDITIVE
+  value: 0.0
+Knockup:
+  type: ADDITIVE
+  value: 0.0
+SelfPush:
+  type: ADDITIVE
+  value: 0.0
+FireTicks:
+  type: ADDITIVE
+  value: 0
